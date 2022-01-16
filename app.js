@@ -1,3 +1,5 @@
+// Add GZIP compression to improve performance
+const compression = require("compression");
 const express = require("express");
 
 const app = express();
@@ -18,4 +20,16 @@ app.get("/hello", (req, res) => {
   res.send("E ai mundo!");
 });
 
+//! NÃO USAR console.log()
+// essa função é síncrona e não é recomendada para uso em produção, pois trava
+// os outros processos.
+
+/**
+ * Para logs em production
+ * winston - https://www.npmjs.com/package/winston
+ * morgan - https://www.npmjs.com/package/morgan
+ * bunyan - https://www.npmjs.com/package/bunyan
+ */
+
+app.use(compression());
 app.listen(port, console.log(`Example app listening on port ${port}!`));
